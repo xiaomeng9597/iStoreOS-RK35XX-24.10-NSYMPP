@@ -45,16 +45,14 @@
 		linux,cma {
 			compatible = "shared-dma-pool";
 			reusable;
-			size = <0x0 0x20000000>; /* 512MB */
+			size = <0 0x10000000>; /* 256MB */
 			linux,cma-default;
-			alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
 		};
 
 		mpp_reserved: mpp-reserved {
 			compatible = "shared-dma-pool";
-			reusable;
-			size = <0x0 0x10000000>; /* 256MB */
-			alloc-ranges = <0x0 0x00000000 0x0 0xffffffff>;
+			no-map;
+			size = <0 0x8000000>; /* 128MB */
 		};
 	};
 
@@ -401,6 +399,7 @@
 		interrupts = <RK_PA3 IRQ_TYPE_LEVEL_LOW>;
 		pinctrl-names = "default", "pmic-sleep", "pmic-power-off", "pmic-reset";
 		pinctrl-0 = <&pmic_int>;
+		rockchip,system-power-controller;
 		wakeup-source;
 		#clock-cells = <1>;
 		clock-output-names = "rk808-clkout1\0rk808-clkout2";
