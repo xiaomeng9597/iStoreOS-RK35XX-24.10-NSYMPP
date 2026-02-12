@@ -159,6 +159,8 @@
 		power-domains = <&power RK3568_PD_GPU>;
 		#cooling-cells = <2>;
 		operating-points-v2 = <&gpu_opp_table>;
+		rockchip,pvtm-enable = <0>;
+		devfreq-governor = "simple_ondemand";
 
 		status = "disabled";
 		gpu_power_model: power-model {
@@ -175,8 +177,8 @@
 	rknpu: npu@fde40000 {
 		compatible = "rockchip,rk3568-rknpu", "rockchip,rknpu";
 		reg = <0x0 0xfde40000 0x0 0x10000>;
-		interrupts = <GIC_SPI 151 IRQ_TYPE_LEVEL_HIGH>, <GIC_SPI 150 IRQ_TYPE_LEVEL_HIGH>;
-		interrupt-names = "npu_irq", "mmu";
+		interrupts = <GIC_SPI 151 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "npu_irq";
 		clocks = <&scmi_clk 2>, <&cru CLK_NPU>, <&cru ACLK_NPU>, <&cru HCLK_NPU>;
 		clock-names = "scmi_clk", "clk", "aclk", "hclk";
 		assigned-clocks = <&cru CLK_NPU>;
@@ -184,6 +186,8 @@
 		resets = <&cru SRST_A_NPU>, <&cru SRST_H_NPU>;
 		reset-names = "srst_a", "srst_h";
 		power-domains = <&power RK3568_PD_NPU>;
+		rockchip,pvtm-enable = <0>;
+		devfreq-governor = "userspace";
 		operating-points-v2 = <&npu_opp_table>;
 		iommus = <&rknpu_mmu>;
 		status = "disabled";
